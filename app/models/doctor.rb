@@ -1,4 +1,5 @@
 class Doctor < ActiveRecord::Base
   has_many :appointments
-  belongs_to :user
+  has_many :patients, through: :appointments
+  has_one :user, as: :role
 end
