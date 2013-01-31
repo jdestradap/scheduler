@@ -5,7 +5,7 @@ class CalendarController < ApplicationController
 
   def authenticate_doctor!
     unless user_signed_in? && current_user.role_type.eql?("doctor")
-      redirect_to calendar_index_path, notice: "You must be a doctor to go here"
+      redirect_to root_path, notice: "You must be a doctor to go here"
     end
   end
 end

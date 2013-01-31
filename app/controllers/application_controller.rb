@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     elsif resource.role_type.eql?("admin")
       admin_path
     elsif resource.role_type.eql?("patient")
-      super
+      home_index_path
     end
   end
 end
