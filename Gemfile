@@ -10,6 +10,7 @@ gem 'devise'
 gem 'simple_form'
 gem 'seed-fu'
 gem 'anjlab-bootstrap-rails', '>= 2.2', require: 'bootstrap-rails'
+gem 'sass-rails',   '~> 3.2.3'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -37,6 +38,10 @@ group :development do
   gem 'letter_opener'
   gem 'pry'
   gem 'quiet_assets'
+end
+
+group :staging, :development do
+  gem 'thin'
 end
 
 # To use ActiveModel has_secure_password
