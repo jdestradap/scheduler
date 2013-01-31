@@ -1,0 +1,18 @@
+default: &local_defaults
+  adapter: postgresql
+  host: localhost
+  encoding: utf8
+  min_messages: WARNING
+  pool: 5
+
+development:
+  <<: *local_defaults
+  database: scheduler_development
+
+test:
+  <<: *local_defaults
+  database: scheduler_test
+
+staging:
+  <<: *local_defaults
+  database: scheduler_staging

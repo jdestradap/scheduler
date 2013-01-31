@@ -1,7 +1,7 @@
 require "spec_helper"
 
-describe HomeController do
-	before { controller.stub(authenticate_patient!: true) }
+describe CalendarController do
+	before { controller.stub(authenticate_doctor!: true) }
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'
@@ -9,4 +9,3 @@ describe HomeController do
     end
   end
 end
-
