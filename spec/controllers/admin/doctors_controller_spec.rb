@@ -1,7 +1,7 @@
 require "spec_helper"
 
-describe HomeController do
-	before { controller.stub(authenticate_patient!: true) }
+describe Admin::DoctorsController do
+	before { controller.stub(authenticate_admin!: true) }
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'
