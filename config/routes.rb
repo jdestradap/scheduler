@@ -1,6 +1,7 @@
 Scheduler::Application.routes.draw do
   get "home/index"
   get "calendar/index"
+  get "welcome/index"
 
   devise_for :users
   match '/admin' => 'admin#index'
@@ -11,5 +12,5 @@ Scheduler::Application.routes.draw do
     resources :patients
   end
 
-  root :to => 'home#index'
+  root :to => 'welcome#index'
 end
