@@ -1,0 +1,21 @@
+<div id="doctor_form">
+  <%= simple_form_for (@doctor || Doctor.new),
+  url: url do |f| %>
+    <% if @doctor.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+        <% @doctor.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.fields_for :user do |builder| %>
+      <%= builder.input :email %>
+      <%= builder.input :password %>
+    <% end %>
+    <%= f.submit class: "btn btn-primary" %>
+  <% end %>
+</div>
