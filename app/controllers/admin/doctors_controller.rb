@@ -3,15 +3,6 @@ class Admin::DoctorsController < AdminController
     @doctors = Doctor.all
   end
 
-  def show
-    @doctors = Doctor.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.json { render json: admin_doctor_path }
-    end
-  end
-
   def new
     @doctor = Doctor.new
     @doctor.build_user
