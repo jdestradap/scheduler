@@ -12,6 +12,6 @@ FactoryGirl.define do
 
   factory :admin, parent: :user do
     email
-    role_type "admin"
+    role_type "Admin"
   end
 end

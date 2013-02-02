@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   private
 
   def authenticate_patient!
-    unless user_signed_in? && current_user.role_type.eql?("patient")
+    unless user_signed_in? && current_user.role_type.eql?("Patient")
       redirect_to root_path, notice: "You must be a patient to go here"
     end
   end

@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_in_path_for(resource)
-    if resource.role_type.eql?("doctor")
+    if resource.role_type.eql?("Doctor")
       calendar_index_path
-    elsif resource.role_type.eql?("admin")
+    elsif resource.role_type.eql?("Adimin")
       admin_path
-    elsif resource.role_type.eql?("patient")
+    elsif resource.role_type.eql?("Patient")
       home_index_path
     end
   end

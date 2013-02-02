@@ -5,7 +5,7 @@ class Doctor < ActiveRecord::Base
 
   has_many :appointments
   has_many :patients, through: :appointments
+  has_many :time_slots
   has_one :user, as: :role
-
   accepts_nested_attributes_for :user
 end
