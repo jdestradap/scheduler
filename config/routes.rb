@@ -1,10 +1,11 @@
 Scheduler::Application.routes.draw do
   get "home/index"
-  get "calendar/index"
   get "welcome/index"
 
   devise_for :users
   match '/admin' => 'admin#index'
+
+  resources :time_slots
 
   namespace :admin do
     resources :appointments

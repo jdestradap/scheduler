@@ -18,7 +18,7 @@ describe ApplicationController do
     describe "When user is a doctor" do
       let(:resource) { double(role_type: "Doctor") }
       it "redirects to the calendar page" do
-        expect(controller.after_sign_in_path_for resource).to eq calendar_index_path
+        expect(controller.after_sign_in_path_for resource).to eq time_slots_path
       end
     end
 
