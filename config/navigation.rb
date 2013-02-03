@@ -49,7 +49,7 @@ SimpleNavigation::Configuration.run do |navigation|
     #                            when the item should be highlighted, you can set a regexp which is matched
     #                            against the current URI.  You may also use a proc, or the symbol <tt>:subpath</tt>.
     #
-    if current_user && current_user.role_type.eql?("admin")
+    if current_user && current_user.role_type.eql?("Admin")
       primary.item :admin_doctors, "Manage Doctors", admin_doctors_path
       primary.item :admin_patients, "Manage Patients", admin_patients_path
       primary.item :admin_appointments, "Manage Appointments", admin_appointments_path

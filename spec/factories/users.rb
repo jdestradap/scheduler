@@ -7,11 +7,16 @@ FactoryGirl.define do
     email
     password "12341234"
     password_confirmation "12341234"
-    role_type "patient"
+    role_type "Patient"
   end
 
-  factory :admin, parent: :user do
+  factory :admin_user, parent: :user do
     email
-    role_type "admin"
+    role_type "Admin"
+  end
+
+  factory :doctor_user, parent: :user do
+    email
+    role_type "Doctor"
   end
 end

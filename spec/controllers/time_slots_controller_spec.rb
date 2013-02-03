@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe CalendarController do
+describe TimeSlotsController do
 	before { controller.stub(authenticate_doctor!: true) }
   describe "GET 'index'" do
     it "returns http success" do
