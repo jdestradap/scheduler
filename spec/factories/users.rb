@@ -10,8 +10,13 @@ FactoryGirl.define do
     role_type "Patient"
   end
 
-  factory :admin, parent: :user do
+  factory :admin_user, parent: :user do
     email
     role_type "Admin"
+  end
+
+  factory :doctor_user, parent: :user do
+    email
+    role_type "Doctor"
   end
 end
