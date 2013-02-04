@@ -7,4 +7,8 @@ class Doctor < ActiveRecord::Base
   has_many :time_slots
   has_one :user, as: :role
   accepts_nested_attributes_for :user
+
+  def full_name
+    "#{first_name} #{last_name}".strip
+  end
 end

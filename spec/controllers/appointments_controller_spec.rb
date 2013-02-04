@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe HomeController do
+describe AppointmentsController do
 	before { controller.stub(authenticate_patient!: true) }
   describe "GET 'index'" do
     it "returns http success" do

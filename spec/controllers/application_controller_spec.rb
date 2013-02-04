@@ -24,8 +24,8 @@ describe ApplicationController do
 
     describe "When user is a patient" do
       let(:resource) { FactoryGirl.build_stubbed(:user) }
-      it "redirects to the home page" do
-        expect(controller.after_sign_in_path_for resource).to eq home_index_path
+      it "redirects to the appointments page" do
+        expect(controller.after_sign_in_path_for resource).to eq appointments_path
       end
     end
   end
