@@ -6,5 +6,6 @@ en:
     doctor_created: "The Doctor has been created successfully"
     doctor_updated: "The Doctor has been updated successfully"
     appointment_created: "The Appointment has been created successfully"
+    appointment_updated: "The Appointment has been updated successfully"
     patient_created: "The Patient has been created successfully"
     patient_updated: "The Doctor has been updated successfully"

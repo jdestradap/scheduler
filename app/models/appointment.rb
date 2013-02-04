@@ -1,5 +1,6 @@
 class Appointment < ActiveRecord::Base
-  attr_accessible :start_date
+  attr_accessible :start_date, :doctor_id, :patient_id
+  attr_reader :doctor_name
 
   validates_associated :doctor, :patient
   validates_presence_of :doctor_id, :patient_id, :start_date
@@ -9,6 +10,12 @@ class Appointment < ActiveRecord::Base
 
   belongs_to :doctor
   belongs_to :patient
+
+  def appointment_doctors
+    Doctor.all.map do |doctor|
+      {label: doctor.first_name, value: doctor.id}
+    end
+  end
 
   private
 
