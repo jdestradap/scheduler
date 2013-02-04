@@ -33,7 +33,6 @@ describe Appointment do
       let(:patient) { FactoryGirl.create(:patient) }
 
       it "returns false" do
-
         strart_date = DateTime.now + 1.year
         appointment = FactoryGirl.create(:appointment, doctor: doctor, patient: patient, start_date: strart_date)
         second_appointment = FactoryGirl.build(:appointment, patient: patient, start_date: strart_date)
@@ -46,7 +45,6 @@ describe Appointment do
       let(:patient) { FactoryGirl.create(:patient) }
 
       it "returns false" do
-
         strart_date = DateTime.now + 1.year
         appointment = FactoryGirl.create(:appointment, doctor: doctor, patient: patient, start_date: strart_date)
         second_appointment = FactoryGirl.build(:appointment, doctor: doctor, start_date: strart_date)

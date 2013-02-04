@@ -21,8 +21,9 @@ ActiveRecord::Schema.define(:version => 20130201233924) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "appointments", ["doctor_id", "patient_id"], :name => "index_appointments_on_doctor_id_and_patient_id", :unique => true
+  add_index "appointments", ["doctor_id", "start_date"], :name => "index_appointments_on_doctor_id_and_start_date", :unique => true
   add_index "appointments", ["doctor_id"], :name => "index_appointments_on_doctor_id"
+  add_index "appointments", ["patient_id", "start_date"], :name => "index_appointments_on_patient_id_and_start_date", :unique => true
   add_index "appointments", ["patient_id"], :name => "index_appointments_on_patient_id"
 
   create_table "doctors", :force => true do |t|
