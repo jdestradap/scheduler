@@ -9,6 +9,18 @@ describe Appointment do
     it "returns true" do
       expect(appointment.save).to be_true
     end
+
+    describe "when there is an appointment at the same time, with a different doctor and patient" do
+      let(:doctor) { FactoryGirl.create(:doctor) }
+      let(:patient) { FactoryGirl.create(:patient) }
+
+      it "returns true" do
+        strart_date = DateTime.now + 1.year
+        appointment = FactoryGirl.create(:appointment, doctor: doctor, patient: patient, start_date: strart_date)
+        second_appointment = FactoryGirl.build(:appointment, start_date: strart_date)
+        expect(second_appointment.save).to be_true
+      end
+    end
   end
 
   context "the appointment is invalid" do
