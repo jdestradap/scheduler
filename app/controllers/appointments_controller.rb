@@ -17,6 +17,7 @@ class AppointmentsController < ApplicationController
                               params[:appointment]["start_date(5i)"].to_i)
 
     @appointment = Appointment.new(start_date: start_date)
+
     @appointment.doctor = Doctor.find(params[:appointment][:doctor_id])
     @appointment.patient = Patient.find(params[:appointment][:patient_id])
 
