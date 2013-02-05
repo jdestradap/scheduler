@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20130201233924) do
     t.integer  "doctor_id"
     t.integer  "patient_id"
     t.datetime "start_date"
+    t.datetime "end_date"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

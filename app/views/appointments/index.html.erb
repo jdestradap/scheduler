@@ -2,7 +2,8 @@
 
 <table class="table table-striped">
   <tr>
-    <th>Date</th>
+    <th>Start Date</th>
+    <th>End Date</th>
     <th>Doctor</th>
     <th>Actions</th>
   </tr>
@@ -10,6 +11,7 @@
 <% @appointments.each do |appointment| %>
   <tr>
     <td><%= appointment.start_date.to_s %></td>
+    <td><%= appointment.end_date.to_s %></td>
     <td><%= appointment.doctor.full_name %></td>
     <td>
       <%= link_to 'Cancel', appointment_path(appointment), confirm: 'Are you sure?', method: :delete %>
