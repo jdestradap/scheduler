@@ -1,0 +1,5 @@
+<p id="notice"><%= notice %></p>
+
+<%= render 'form', url: appointments_path %>
+<%= link_to 'Cancel', calendar_appointment_path(@appointment), confirm: 'Are you sure?', method: :delete%> |
+<%= link_to 'Back', calendar_appointments_path %>
