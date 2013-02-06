@@ -3,13 +3,18 @@ Scheduler::Application.routes.draw do
 
   devise_for :users
   match '/admin' => 'admin#index'
+  match '/calendar' => 'calendar#index'
   resources :appointments
-  resources :time_slots
 
   namespace :admin do
     resources :appointments
     resources :doctors
     resources :patients
+  end
+
+  namespace :calendar do
+    resources :time_slots
+    resources :appointments
   end
 
   root :to => 'welcome#index'
