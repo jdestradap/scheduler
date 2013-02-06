@@ -2,7 +2,7 @@ class AppointmentsController < ApplicationController
   before_filter :authenticate_patient!
 
   def index
-    @appointments = Appointment.all
+    @appointments = Patient.find(current_user.role_id).appointments
   end
 
   def new
