@@ -10,6 +10,7 @@ class Calendar::AppointmentsController < CalendarController
 
   def destroy
     @appointment = Appointment.find(params[:id])
+    AppointmentMailer.appointment_canceled_notification(@appointment).deliver
     @appointment.destroy
 
     respond_to do |format|
