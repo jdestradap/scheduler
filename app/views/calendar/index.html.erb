@@ -10,7 +10,7 @@
     <% if @appointments_by_date[date] %>
       <ul>
         <% @appointments_by_date[date].each do |appointment| %>
-          <li><%= link_to appointment.patient.first_name, appointment %></li>
+          <li><%= link_to appointment.patient.full_name, calendar_appointment_path(appointment) %></li>
         <% end %>
       </ul>
     <% end %>
