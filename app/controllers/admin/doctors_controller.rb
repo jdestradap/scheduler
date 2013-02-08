@@ -1,4 +1,6 @@
 class Admin::DoctorsController < AdminController
+  before_filter :get_doctor, only: [:edit, :update, :destroy]
+
   def index
     @doctors = Doctor.all
   end
@@ -13,11 +15,7 @@ class Admin::DoctorsController < AdminController
   end
 
   def create
-    @doctor = Doctor.new(first_name: params[:doctor][:first_name],
-                         last_name: params[:doctor][:last_name])
-
-    @doctor.build_user(email: params[:doctor][:user_attributes][:email],
-    	                 password: params[:doctor][:user_attributes][:password])
+    @doctor = Doctor.new(params[:doctor])
     if @doctor.save
       redirect_to admin_doctors_path, notice: t('flash.doctor_created')
     else
@@ -30,11 +28,9 @@ class Admin::DoctorsController < AdminController
 
     respond_to do |format|
       if @doctor.update_attributes(params[:doctor])
-        format.html { redirect_to admin_doctor_path, notice: t('flash.doctor_updated') }
-        format.json { head :no_content }
+        redirect_to admin_doctor_path, notice: t('flash.doctor_updated')
       else
-        format.html { render action: "edit" }
-        format.json { render json: @doctor.errors, status: :unprocessable_entity }
+        render action: "edit"
       end
     end
   end
@@ -44,8 +40,13 @@ class Admin::DoctorsController < AdminController
     @doctor.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_doctors_url }
-      format.json { head :no_content }
+      redirect_to admin_doctors_url
     end
+  end
+
+  private
+
+  def get_doctor
+    @doctor = Doctor.find(params[:id])
   end
 end

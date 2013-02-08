@@ -1,7 +1,8 @@
 Scheduler::Application.routes.draw do
   get "welcome/index"
 
-  devise_for :users
+  devise_for :users, controllers: {registrations: "registrations"}
+
   match '/admin' => 'admin#index'
   match '/calendar' => 'calendar#index'
   resources :appointments
