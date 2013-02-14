@@ -1,0 +1,21 @@
+<h2>Sign up</h2>
+
+<%= simple_form_for(@patient || Patient.new, url: user_registration_path(@patient)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+  	<%= f.input :first_name, autofocus: true %>
+  	<%= f.input :last_name %>
+  	<%= f.fields_for :user do |builder| %>
+      <%= builder.input :email %>
+      <%= builder.input :password %>
+      <%= builder.input :password_confirmation, required: true %>
+    <% end %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
