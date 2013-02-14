@@ -11,7 +11,6 @@ class Admin::DoctorsController < AdminController
   end
 
   def edit
-    @doctor = Doctor.find(params[:id])
   end
 
   def create
@@ -24,24 +23,16 @@ class Admin::DoctorsController < AdminController
   end
 
   def update
-    @doctor = Doctor.find(params[:id])
-
-    respond_to do |format|
-      if @doctor.update_attributes(params[:doctor])
-        redirect_to admin_doctor_path, notice: t('flash.doctor_updated')
-      else
-        render action: "edit"
-      end
+    if @doctor.update_attributes(params[:doctor])
+      redirect_to admin_doctor_path, notice: t('flash.doctor_updated')
+    else
+      render action: "edit"
     end
   end
 
   def destroy
-    @doctor = Doctor.find(params[:id])
     @doctor.destroy
-
-    respond_to do |format|
-      redirect_to admin_doctors_url
-    end
+    redirect_to admin_doctors_url
   end
 
   private

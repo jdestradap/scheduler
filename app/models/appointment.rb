@@ -44,7 +44,8 @@ class Appointment < ActiveRecord::Base
   end
 
   def exist_an_appointment(instance)
-  	not instance.appointments.find(:first, :conditions => ["(end_date > ? AND end_date <= ?)", start_date, end_date]).nil?
+    not instance.appointments.find(:first, :conditions => ["(end_date > ? AND end_date <= ?)",
+                                                           start_date, end_date]).nil?
   end
 
   def update_end_time

@@ -31,11 +31,7 @@ class AppointmentsController < ApplicationController
   def destroy
     @appointment = Appointment.find(params[:id])
     @appointment.destroy
-
-    respond_to do |format|
-      format.html { redirect_to appointments_url }
-      format.json { head :no_content }
-    end
+    redirect_to appointments_url
   end
 
   private

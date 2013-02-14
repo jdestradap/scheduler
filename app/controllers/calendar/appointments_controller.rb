@@ -1,7 +1,7 @@
 class Calendar::AppointmentsController < CalendarController
-  def show
-    @appointment = Appointment.find(params[:id])
+  before_filter :get_appointment, only: [:show, :destroy]
 
+  def show
     respond_to do |format|
       format.html
       format.json { render json: @appointment }
@@ -9,13 +9,14 @@ class Calendar::AppointmentsController < CalendarController
   end
 
   def destroy
-    @appointment = Appointment.find(params[:id])
     AppointmentMailer.appointment_canceled_notification(@appointment).deliver
     @appointment.destroy
+    redirect_to calendar_appointments_url
+  end
 
-    respond_to do |format|
-      format.html { redirect_to calendar_appointments_url }
-      format.json { head :no_content }
-    end
+  private
+
+  def get_appointment
+    @appointment = Appointment.find(params[:id])
   end
 end

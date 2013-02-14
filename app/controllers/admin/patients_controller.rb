@@ -1,4 +1,6 @@
 class Admin::PatientsController < AdminController
+  before_filter :get_patient, only: [:edit, :update, :destroy]
+
   def index
     @patients = Patient.all
   end
@@ -9,7 +11,6 @@ class Admin::PatientsController < AdminController
   end
 
   def edit
-    @patient = Patient.find(params[:id])
   end
 
   def create
@@ -23,26 +24,21 @@ class Admin::PatientsController < AdminController
   end
 
   def update
-    @patient = Patient.find(params[:id])
-
-    respond_to do |format|
-      if @patient.update_attributes(params[:patient])
-        format.html { redirect_to admin_patient_path, notice: t('flash.patient_created') }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @patient.errors, status: :unprocessable_entity }
-      end
+    if @patient.update_attributes(params[:patient])
+      redirect_to admin_patient_path, notice: t('flash.patient_created')
+    else
+      render action: "edit"
     end
   end
 
   def destroy
-    @patient = Patient.find(params[:id])
     @patient.destroy
+    redirect_to admin_patients_url
+  end
 
-    respond_to do |format|
-      format.html { redirect_to admin_patients_url }
-      format.json { head :no_content }
-    end
+  private
+
+  def get_patient
+    @patient = Patient.find(params[:id])
   end
 end
