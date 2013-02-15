@@ -1,4 +1,5 @@
 require "spec_helper"
+require "pry"
 
 describe Appointment do
   describe "when a patient creates a valid appointment" do
@@ -67,6 +68,16 @@ describe Appointment do
         appointment = FactoryGirl.create(:appointment, doctor: doctor, patient: patient, start_date: start_date)
         second_appointment = FactoryGirl.build(:appointment, doctor: doctor, patient: patient, start_date: second_start_date)
         expect(second_appointment.save).to be_false
+      end
+    end
+
+    describe "when the appointment starts in a doctor unavailable hour" do
+      let(:doctor) { FactoryGirl.create(:doctor) }
+
+      it "returns false" do
+        FactoryGirl.create(:time_slot, start_date: Date.today, start_time: Time.now, end_time: Time.now + 30.minutes, doctor: doctor)
+        appointment = FactoryGirl.build(:appointment, doctor: doctor, start_date: DateTime.now)
+        expect(appointment.save).to be_false
       end
     end
   end

@@ -21,17 +21,16 @@ class TimeSlot < ActiveRecord::Base
   end
 
   def doctor_already_set_unavailable_hour
-  	if(time_slot_reserved)
-  		errors.add(:start_time, "You have already set unavailable hour(s) in this time slot")
-  	end
+    if(time_slot_reserved)
+      errors.add(:start_time, "You have already set unavailable hour(s) in this time slot")
+    end
   end
 
   def time_slot_reserved
-  	doctor = Doctor.find doctor_id
-    not doctor.time_slots.find(:first, :conditions => ["(start_date = ? AND end_time > ? AND start_time < ?)", start_date, start_time, end_time]).nil?
+    not doctor.time_slots.find(:first, conditions: ["(start_date = ? AND end_time > ? AND start_time < ?)", start_date, start_time, end_time]).nil?
   end
 
-  def doctor_availability
-
+  def doctor
+    Doctor.find doctor_id
   end
 end

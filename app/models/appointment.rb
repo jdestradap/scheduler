@@ -28,24 +28,33 @@ class Appointment < ActiveRecord::Base
   end
 
   def appointment_availability
-    if(doctor_has_appointment? or patient_has_appointment?)
+    if(doctor_has_appointment? or patient_has_appointment? or doctor_availability?)
       errors.add(:start_date, "this date is not available")
     end
   end
 
+  def doctor_availability?
+    doctor.doctor_availability(start_date.to_date, start_date.to_time, end_date.to_time)
+  end
+
+  def doctor
+    Doctor.find(doctor_id)
+  end
+
+  def patient
+    Patient.find(patient_id)
+  end
+
   def doctor_has_appointment?
-  	doctor = Doctor.find(doctor_id)
     exist_an_appointment(doctor)
   end
 
   def patient_has_appointment?
-    patient = Patient.find(patient_id)
     exist_an_appointment(patient)
   end
 
   def exist_an_appointment(instance)
-    not instance.appointments.find(:first, :conditions => ["(end_date > ? AND end_date <= ?)",
-                                                           start_date, end_date]).nil?
+    not instance.appointments.find(:first, conditions: ["(end_date > ? AND start_date < ?)", start_date, end_date]).nil?
   end
 
   def update_end_time
