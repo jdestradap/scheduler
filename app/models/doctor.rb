@@ -12,4 +12,8 @@ class Doctor < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}".strip
   end
+
+  def doctor_availability(start_date, start_time, end_time)
+    not time_slots.find(:first, conditions: ["(start_date = ? AND end_time > ? AND start_time < ?)", start_date, start_time, end_time]).nil?
+  end
 end

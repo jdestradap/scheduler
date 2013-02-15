@@ -4,7 +4,7 @@ describe TimeSlot do
   describe "When a doctor submit a unavailable hour" do
     context "the time slot is invalid" do
       describe "when the start_date is in the past" do
-        let(:time_slot) { FactoryGirl.build(:time_slot, start_date: Date.yesterday) }
+        let(:time_slot) { FactoryGirl.build(:time_slot, start_date: Date.today - 1.day) }
         it "returns false" do
           expect(time_slot.save).to be_false
         end
