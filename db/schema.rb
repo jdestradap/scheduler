@@ -42,9 +42,10 @@ ActiveRecord::Schema.define(:version => 20130201233924) do
   end
 
   create_table "time_slots", :force => true do |t|
-    t.integer  "doctor_id"
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.integer "doctor_id"
+    t.date    "start_date"
+    t.time    "start_time"
+    t.time    "end_time"
   end
 
   create_table "users", :force => true do |t|
