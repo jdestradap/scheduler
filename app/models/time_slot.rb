@@ -27,10 +27,10 @@ class TimeSlot < ActiveRecord::Base
   end
 
   def time_slot_reserved
-    not doctor.time_slots.find(:first, conditions: ["(start_date = ? AND end_time > ? AND start_time < ?)", start_date, start_time, end_time]).nil?
+    not doctor_by_id.time_slots.find(:first, conditions: ["(start_date = ? AND end_time > ? AND start_time < ?)", start_date, start_time, end_time]).nil?
   end
 
-  def doctor
+  def doctor_by_id
     Doctor.find doctor_id
   end
 end

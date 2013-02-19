@@ -34,23 +34,23 @@ class Appointment < ActiveRecord::Base
   end
 
   def doctor_availability?
-    doctor.doctor_availability(start_date.to_date, start_date.to_time, end_date.to_time)
+    doctor_by_id.doctor_availability(start_date.to_date, start_date.to_time, end_date.to_time)
   end
 
-  def doctor
+  def doctor_by_id
     Doctor.find(doctor_id)
   end
 
-  def patient
+  def patient_by_id
     Patient.find(patient_id)
   end
 
   def doctor_has_appointment?
-    exist_an_appointment(doctor)
+    exist_an_appointment(doctor_by_id)
   end
 
   def patient_has_appointment?
-    exist_an_appointment(patient)
+    exist_an_appointment(patient_by_id)
   end
 
   def exist_an_appointment(instance)
