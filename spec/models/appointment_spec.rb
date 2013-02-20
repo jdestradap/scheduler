@@ -1,5 +1,4 @@
 require "spec_helper"
-require "pry"
 
 describe Appointment do
   describe "when a patient creates a valid appointment" do
