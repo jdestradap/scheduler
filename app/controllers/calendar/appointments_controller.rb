@@ -12,7 +12,7 @@ class Calendar::AppointmentsController < CalendarController
   def destroy
     AppointmentMailer.appointment_canceled_notification(@appointment).deliver
     @appointment.destroy
-    redirect_to calendar_appointments_url
+    redirect_to calendar_appointments_url(doctor_id: "#{@appointment.doctor_id}")
   end
 
   private

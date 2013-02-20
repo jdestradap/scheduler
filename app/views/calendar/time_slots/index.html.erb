@@ -1,1 +1,1 @@
-<%= link_to "Set unavailable hours", new_calendar_time_slot_path_polymorphic(current_user, @doctor_id) %> | <%= link_to "Calendar", calendar_path_polymorphic(current_user, @doctor_id) %>
+<%= link_to "Set unavailable hours", new_calendar_time_slot_path(doctor_id: "#{@doctor_id}") %> | <%= link_to "Calendar", calendar_path_polymorphic(current_user, @doctor_id) %>
