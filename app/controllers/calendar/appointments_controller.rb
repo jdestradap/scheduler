@@ -2,6 +2,7 @@ class Calendar::AppointmentsController < CalendarController
   before_filter :get_appointment, only: [:show, :destroy]
 
   def show
+    @doctor_id = @appointment.doctor_id
     respond_to do |format|
       format.html
       format.json { render json: @appointment }
