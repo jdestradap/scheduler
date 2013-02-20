@@ -34,3 +34,5 @@ class TimeSlot < ActiveRecord::Base
     Doctor.find doctor_id
   end
 end
+
+

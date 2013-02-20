@@ -15,5 +15,5 @@
       </ul>
     <% end %>
   <% end %>
-  <%= link_to "Unavailable hours", calendar_time_slots_path %>
+  <%= link_to "Unavailable hours", calendar_time_slots_path(doctor_id: "#{@doctor_id}") %>
 </div>

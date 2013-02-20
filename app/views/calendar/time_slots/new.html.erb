@@ -1,7 +1,7 @@
 <div id="time_slot_form">
   <%= simple_form_for (@time_slot || TimeSlot.new),
   url: calendar_time_slots_path do |f| %>
-    <%= f.hidden_field :doctor_id, value: current_user.role_id %>
+    <%= f.hidden_field :doctor_id, value: @doctor_id %>
     <%= f.input :start_date, label: 'Date' %>
     <%= f.input :start_time %>
     <%= f.input :end_time %>
