@@ -52,7 +52,6 @@ SimpleNavigation::Configuration.run do |navigation|
     if current_user && current_user.role_type.eql?("Admin")
       primary.item :admin_doctors, "Manage Doctors", admin_doctors_path
       primary.item :admin_patients, "Manage Patients", admin_patients_path
-      primary.item :admin_appointments, "Manage Appointments", admin_appointments_path
       primary.dom_class = 'nav'
    end
     # primary.item :key_1, 'name', url, options

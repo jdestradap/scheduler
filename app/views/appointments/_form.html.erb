@@ -1,7 +1,7 @@
 <div id="appointment_form">
   <%= simple_form_for (@appointment || Appointment.new),
   url: url do |f| %>
-    <%= f.hidden_field :patient_id, value: current_user.role_id %>
+    <%= f.hidden_field :patient_id, value: @patient_id %>
     <%= f.input :start_date %>
     <%= f.hidden_field :doctor_id %>
     <%= f.input :doctor_id, label: "Doctor" do %>

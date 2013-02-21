@@ -14,7 +14,7 @@
     <td>
       <%= link_to 'Edit', edit_admin_doctor_path(doctor) %> |
       <%= link_to 'Destroy', admin_doctor_path(doctor), confirm: 'Are you sure?', method: :delete %> |
-      <%= link_to 'Show Calendar', calendar_path(doctor_id: "#{doctor.id}") %>
+      <%= link_to 'Calendar', calendar_path(doctor_id: "#{doctor.id}") %>
     </td>
   </tr>
 <% end %>

@@ -8,4 +8,4 @@
     <%= f.submit class: "btn btn-primary" %>
   <% end %>
 </div>
-<%= link_to "Cancel", calendar_path %>
+<%= link_to "Calendar", calendar_path(doctor_id: "#{@doctor_id}") %>
