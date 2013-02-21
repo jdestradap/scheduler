@@ -22,4 +22,4 @@
 
 <br />
 
-<%= link_to "Add an appointment", new_appointment_path %>
+<%= link_to "Add an appointment", new_appointment_path(patient_id: "#{@patient_id}") %>

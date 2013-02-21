@@ -2,4 +2,4 @@
 
 <%= render 'form', url: appointments_path %>
 
-<%= link_to 'Back', appointments_path %>
+<%= link_to 'Back', appointments_path(patient_id: "#{@patient_id}") %>

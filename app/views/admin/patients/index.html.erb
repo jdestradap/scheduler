@@ -13,7 +13,8 @@
     <td><%= patient.last_name %></td>
     <td>
       <%= link_to 'Edit', edit_admin_patient_path(patient) %> |
-      <%= link_to 'Destroy', admin_patient_path(patient), confirm: 'Are you sure?', method: :delete %>
+      <%= link_to 'Destroy', admin_patient_path(patient), confirm: 'Are you sure?', method: :delete %> |
+      <%= link_to 'Appointments', appointments_path(patient_id: "#{patient.id}") %>
     </td>
   </tr>
 <% end %>

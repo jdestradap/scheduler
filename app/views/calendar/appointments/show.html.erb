@@ -2,4 +2,4 @@
 
 <%= render 'form', url: appointments_path %>
 <%= link_to 'Cancel', calendar_appointment_path(@appointment), confirm: 'Are you sure?', method: :delete %> |
-<%= link_to 'Back', calendar_path_polymorphic(current_user, @doctor_id) %>
+<%= link_to 'Back', calendar_path(doctor_id: "#{@doctor_id}") %>
