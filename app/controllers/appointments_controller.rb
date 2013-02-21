@@ -3,10 +3,12 @@ class AppointmentsController < ApplicationController
 
   def index
     if(current_user.role_type.eql?("Admin") and params[:patient_id].present?)
-      @appointments = Patient.find(params[:patient_id]).appointments
+      @appointments = Patient.find(params[:patient_id]).appointments.current_appointments
+      @previous_appointments = Patient.find(params[:patient_id]).appointments.previous_appointments
       @patient_id = params[:patient_id]
     else
-      @appointments = Patient.find(current_user.role_id).appointments
+      @appointments = Patient.find(current_user.role_id).appointments.current_appointments
+      @previous_appointments = Patient.find(current_user.role_id).appointments.previous_appointments
       @patient_id = current_user.role_id
     end
   end

@@ -13,6 +13,9 @@ class Appointment < ActiveRecord::Base
 
   before_validation :update_end_time
 
+  scope :previous_appointments, where('start_date < ?', DateTime.now)
+  scope :current_appointments, where('start_date >= ?', DateTime.now)
+
   def appointment_doctors
     Doctor.all.map do |doctor|
       {label: doctor.first_name, value: doctor.id}

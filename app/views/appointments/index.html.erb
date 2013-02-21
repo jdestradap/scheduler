@@ -1,25 +1,4 @@
-<h5>Listing Appointments</h5>
-
-<table class="table table-striped">
-  <tr>
-    <th>Start Date</th>
-    <th>End Date</th>
-    <th>Doctor</th>
-    <th>Actions</th>
-  </tr>
-
-<% @appointments.each do |appointment| %>
-  <tr>
-    <td><%= appointment.start_date.to_s %></td>
-    <td><%= appointment.end_date.to_s %></td>
-    <td><%= appointment.doctor.full_name %></td>
-    <td>
-      <%= link_to 'Cancel', appointment_path(appointment), confirm: 'Are you sure?', method: :delete %>
-    </td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
+<h3>Patient Appointments</h3>
+<%= render 'previous_appointments' %>
+<%= render 'appointments' %>
 <%= link_to "Add an appointment", new_appointment_path(patient_id: "#{@patient_id}") %>
