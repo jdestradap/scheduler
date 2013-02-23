@@ -1,10 +1,12 @@
 class TimeSlot < ActiveRecord::Base
-  include IceCube
-  attr_accessible :doctor_id, :start_date, :start_time, :end_time
+  attr_accessible :doctor_id, :start_date, :start_time, :end_time, :schedule_rule
   validates_associated :doctor
   validates_presence_of :doctor_id, :start_date, :start_time, :end_time
   validate :start_date_past, :start_time_after_end_time, :doctor_already_set_unavailable_hour
   belongs_to :doctor
+  serialize :schedule_rule, Hash
+
+  after_validation :create_schedule_rule
 
   private
 
@@ -32,6 +34,12 @@ class TimeSlot < ActiveRecord::Base
 
   def doctor_by_id
     Doctor.find doctor_id
+  end
+
+  def create_schedule_rule
+    if(start_time.present? && end_time.present?)
+      self.schedule_rule = Scheduler::ScheduleRecurrency.new({start_time: start_time, end_time: end_time}).schedule_to_hash
+    end
   end
 end
 

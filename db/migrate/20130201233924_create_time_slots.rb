@@ -5,6 +5,7 @@ class CreateTimeSlots < ActiveRecord::Migration
       t.date :start_date
       t.time :start_time
       t.time :end_time
+      t.string :schedule_rule
 
       t.timestamp
     end
