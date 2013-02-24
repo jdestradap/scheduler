@@ -1,5 +1,4 @@
 require "spec_helper"
-require "pry"
 
 describe AppointmentsController do
   let(:user) { double(role_id: double.as_null_object, role_type: "Patient") }
