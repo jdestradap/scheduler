@@ -35,7 +35,7 @@ describe TimeSlot do
   describe "When a doctor set a valid recurrence time slot" do
     let(:doctor) { FactoryGirl.create(:doctor) }
 
-    it "retunrs true" do
+    it "returns true" do
       start_date = Date.today
       start_time = Time.now
       end_time = start_time + 20.minutes

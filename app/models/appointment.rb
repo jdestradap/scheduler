@@ -31,13 +31,17 @@ class Appointment < ActiveRecord::Base
   end
 
   def appointment_availability
-    if(doctor_has_appointment? or patient_has_appointment? or doctor_availability?)
+    if(doctor_has_appointment? or patient_has_appointment? or doctor_availability? or doctor_availability_recurring?)
       errors.add(:start_date, "this date is not available")
     end
   end
 
   def doctor_availability?
     doctor_by_id.doctor_availability(start_date.to_date, start_date.to_time, end_date.to_time)
+  end
+
+  def doctor_availability_recurring?
+    doctor_by_id.doctor_availability_recurring(start_date.to_time, end_date.to_time)
   end
 
   def doctor_by_id
