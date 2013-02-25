@@ -6,8 +6,11 @@ class CreateTimeSlots < ActiveRecord::Migration
       t.time :start_time
       t.time :end_time
       t.string :schedule_rule
+      t.boolean :recurrent, default: false
 
       t.timestamp
     end
+    add_index :time_slots, :doctor_id
+    add_index :time_slots, [:doctor_id, :start_date, :start_date], unique: true
   end
 end

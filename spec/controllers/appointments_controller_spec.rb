@@ -6,8 +6,8 @@ describe AppointmentsController do
                         previous_appointments: [double.as_null_object]),
                         patient_id: double.as_null_object) }
 
-	before do
-	  controller.stub(authenticate_patient!: true, current_user: user)
+  before do
+    controller.stub(authenticate_patient!: true, current_user: user)
   end
 
   describe "GET 'index'" do

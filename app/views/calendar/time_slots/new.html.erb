@@ -1,3 +1,4 @@
+<h5> Set Unavailable Hours</h5>
 <div id="time_slot_form">
   <%= simple_form_for (@time_slot || TimeSlot.new),
   url: calendar_time_slots_path do |f| %>
@@ -5,6 +6,7 @@
     <%= f.input :start_date, label: 'Date' %>
     <%= f.input :start_time %>
     <%= f.input :end_time %>
+    <%= f.input :recurrent, label: 'Daily' %>
     <%= f.submit class: "btn btn-primary" %>
   <% end %>
 </div>

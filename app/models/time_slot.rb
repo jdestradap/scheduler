@@ -1,8 +1,9 @@
 class TimeSlot < ActiveRecord::Base
-  attr_accessible :doctor_id, :start_date, :start_time, :end_time, :schedule_rule
+  attr_accessible :doctor_id, :start_date, :start_time, :end_time, :schedule_rule, :recurrent
   validates_associated :doctor
   validates_presence_of :doctor_id, :start_date, :start_time, :end_time
   validate :start_date_past, :start_time_after_end_time, :doctor_already_set_unavailable_hour
+  validates_uniqueness_of :doctor_id, :scope => [:start_date, :start_time]
   belongs_to :doctor
   serialize :schedule_rule, Hash
 
@@ -23,13 +24,17 @@ class TimeSlot < ActiveRecord::Base
   end
 
   def doctor_already_set_unavailable_hour
-    if(time_slot_reserved)
+    if(time_slot_reserved or time_slot_reserved_recurrently)
       errors.add(:start_time, "You have already set unavailable hour(s) in this time slot")
     end
   end
 
   def time_slot_reserved
-    not doctor_by_id.time_slots.find(:first, conditions: ["(start_date = ? AND end_time > ? AND start_time < ?)", start_date, start_time, end_time]).nil?
+    doctor_by_id.doctor_availability(start_date, start_time, end_time)
+  end
+
+  def time_slot_reserved_recurrently
+    doctor_by_id.doctor_availability_recurring(start_time, end_time)
   end
 
   def doctor_by_id
@@ -37,10 +42,8 @@ class TimeSlot < ActiveRecord::Base
   end
 
   def create_schedule_rule
-    if(start_time.present? && end_time.present?)
+    if(start_time.present? && end_time.present? && recurrent)
       self.schedule_rule = Scheduler::ScheduleRecurrency.new({start_time: start_time, end_time: end_time}).schedule_to_hash
     end
   end
 end
-
-

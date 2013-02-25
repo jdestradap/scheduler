@@ -19,20 +19,12 @@ class AppointmentsController < ApplicationController
   end
 
   def create
-    start_date = DateTime.new(params[:appointment]["start_date(1i)"].to_i,
-                              params[:appointment]["start_date(2i)"].to_i,
-                              params[:appointment]["start_date(3i)"].to_i,
-                              params[:appointment]["start_date(4i)"].to_i,
-                              params[:appointment]["start_date(5i)"].to_i)
-
-    @appointment = Appointment.new(start_date: start_date)
-
-    @appointment.doctor = Doctor.find(params[:appointment][:doctor_id])
-    @appointment.patient = Patient.find(params[:appointment][:patient_id])
-
+    params[:appointment].delete(:doctor_name)
+    @appointment = Appointment.new(params[:appointment])
     if @appointment.save
       redirect_to appointments_path(patient_id: "#{@appointment.patient_id}"), notice: t('flash.appointment_created')
     else
+      @patient_id = @appointment.patient_id
       render "new"
     end
   end

@@ -8,16 +8,16 @@ describe Appointment do
 
     describe "when a patient creates a valid appointment" do
       it "returns true" do
-
         expect(appointment.save).to be_true
       end
     end
 
     describe "when there is an appointment at the same time, with a different doctor and patient" do
+      let(:second_doctor) { FactoryGirl.create(:doctor, id: 2) }
       it "returns true" do
         start_date = DateTime.now + 1.year
         appointment = FactoryGirl.create(:appointment, doctor: doctor, patient: patient, start_date: start_date)
-        second_appointment = FactoryGirl.build(:appointment, start_date: start_date)
+        second_appointment = FactoryGirl.build(:appointment, doctor: second_doctor, start_date: start_date)
         expect(second_appointment.save).to be_true
       end
     end
@@ -39,7 +39,7 @@ describe Appointment do
       it "returns false" do
         start_date = DateTime.now + 1.year
         appointment = FactoryGirl.create(:appointment, doctor: doctor, patient: patient, start_date: start_date)
-        second_appointment = FactoryGirl.build(:appointment, patient: patient, start_date: start_date)
+        second_appointment = FactoryGirl.build(:appointment, doctor: doctor, patient: patient, start_date: start_date)
         expect(second_appointment.save).to be_false
       end
     end
@@ -89,7 +89,7 @@ describe Appointment do
         end_time = start_time + 50.minutes
         start_date_appointment = start_time.to_datetime + 1.day
         schedule_rule = Scheduler::ScheduleRecurrency.new({start_time: start_time, end_time: end_time}).schedule_to_hash
-        FactoryGirl.create(:time_slot, start_date: start_date, start_time: start_time, end_time: end_time, doctor: doctor, schedule_rule: schedule_rule)
+        FactoryGirl.create(:time_slot, start_date: start_date, start_time: start_time, end_time: end_time, doctor: doctor, schedule_rule: schedule_rule, recurrent: true)
         appointment = FactoryGirl.build(:appointment, doctor: doctor, start_date: start_date_appointment - 5.hours)
         expect(appointment.save).to be_false
       end

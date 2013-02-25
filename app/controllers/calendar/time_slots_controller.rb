@@ -14,6 +14,7 @@ class Calendar::TimeSlotsController < CalendarController
     if @time_slot.save
       redirect_to calendar_time_slots_path(doctor_id: "#{@time_slot.doctor_id}"), notice: t('flash.time_slot_created')
     else
+      @doctor_id = @time_slot.doctor_id
       render "new"
     end
   end

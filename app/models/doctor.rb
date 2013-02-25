@@ -14,11 +14,11 @@ class Doctor < ActiveRecord::Base
   end
 
   def doctor_availability(start_date, start_time, end_time)
-    not time_slots.find(:first, conditions: ["(start_date = ? AND end_time > ? AND start_time < ?)", start_date, start_time, end_time]).nil?
+    not time_slots.find(:first, conditions: ["(recurrent = ? AND start_date = ? AND end_time > ? AND start_time < ?)", false, start_date, start_time, end_time]).nil?
   end
 
   def doctor_availability_recurring(start_time, end_time)
-    items = time_slots.find(:all, conditions: ["(start_date >= ? AND end_time > ? AND start_time < ?)", Date.today, start_time, end_time])
+    items = time_slots.find(:all, conditions: ["(recurrent = ? AND start_date >= ? AND end_time > ? AND start_time < ?)", true, Date.today, start_time, end_time])
     items.each do |item|
       schedule = Scheduler::ScheduleRecurrency.new({hash: item.schedule_rule}).schedule_from_hash
       return true if schedule.occurring_between?(start_time, end_time)

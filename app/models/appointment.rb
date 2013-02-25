@@ -1,8 +1,7 @@
 class Appointment < ActiveRecord::Base
-  attr_accessible :start_date
+  attr_accessible :start_date, :doctor_id, :patient_id
   attr_reader :doctor_name
 
-  validates_associated :doctor, :patient
   validates_presence_of :doctor_id, :patient_id, :start_date, :end_date
   validate :start_date_past, :appointment_availability
   validates_uniqueness_of :start_date, scope: :doctor_id
@@ -37,11 +36,15 @@ class Appointment < ActiveRecord::Base
   end
 
   def doctor_availability?
-    doctor_by_id.doctor_availability(start_date.to_date, start_date.to_time, end_date.to_time)
+    if (doctor_id.present?)
+      doctor_by_id.doctor_availability(start_date.to_date, start_date.to_time, end_date.to_time)
+    else return end
   end
 
   def doctor_availability_recurring?
-    doctor_by_id.doctor_availability_recurring(start_date.to_time, end_date.to_time)
+    if(doctor_id.present?)
+      doctor_by_id.doctor_availability_recurring(start_date.to_time, end_date.to_time)
+    else return end
   end
 
   def doctor_by_id
@@ -53,7 +56,9 @@ class Appointment < ActiveRecord::Base
   end
 
   def doctor_has_appointment?
-    exist_an_appointment(doctor_by_id)
+    if (doctor_id.present?)
+      exist_an_appointment(doctor_by_id)
+    else return end
   end
 
   def patient_has_appointment?

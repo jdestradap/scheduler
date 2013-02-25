@@ -47,7 +47,11 @@ ActiveRecord::Schema.define(:version => 20130201233924) do
     t.time    "start_time"
     t.time    "end_time"
     t.string  "schedule_rule"
+    t.boolean "recurrent",     :default => false
   end
+
+  add_index "time_slots", ["doctor_id", "start_date", "start_date"], :name => "index_time_slots_on_doctor_id_and_start_date_and_start_date", :unique => true
+  add_index "time_slots", ["doctor_id"], :name => "index_time_slots_on_doctor_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
