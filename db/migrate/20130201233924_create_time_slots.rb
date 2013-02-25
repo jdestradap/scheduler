@@ -6,6 +6,7 @@ class CreateTimeSlots < ActiveRecord::Migration
       t.time :start_time
       t.time :end_time
       t.string :schedule_rule
+      t.boolean :recurrent, default: false
 
       t.timestamp
     end

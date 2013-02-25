@@ -17,6 +17,7 @@ module Scheduler
       Schedule.from_hash(hash)
     end
 
+    # TODO should be set the start date filled by the user, not the currend date.
     def schedule_to_hash
       schedule = Schedule.new(@start_time, end_time: @end_time)
       schedule.add_recurrence_rule(Rule.daily)

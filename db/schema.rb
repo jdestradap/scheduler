@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20130201233924) do
     t.time    "start_time"
     t.time    "end_time"
     t.string  "schedule_rule"
+    t.boolean "recurrent",     :default => false
   end
 
   create_table "users", :force => true do |t|
